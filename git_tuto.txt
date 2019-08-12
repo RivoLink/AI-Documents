@@ -1,0 +1,13 @@
+git config --global user.name "RivoLink" 
+git config --global user.email "rivo.link@gmail.com"
+
+git clone /chemin/vers/le/dossier/local
+git clone utilisateur@hote:/chemin/vers/le/dépôt
+
+git add <nom_fichier>
+git add .
+
+git commit –m "Message pour decrire le commit"
+
+git push
+
