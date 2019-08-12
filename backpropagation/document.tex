@@ -39,15 +39,16 @@ f(z_j)=\frac{1}{1+e^{-z_j}}=f(\sum_i{{x_i}{w_{ij}}}+b_j)
 Comme les sorties des j neurones de la couche cachée sont les entrée des k neurones de la couche de sortie, en notant $(x_j)_j$ ces entrées, $(w_{jk})_j$ les poids et $b_k$ le biais, on aura pour le neurone k de la couche de sortie, la pré-activation $z_k$:
 $$x_j=f(z_j)$$
 \begin{equation}
-z_k=\sum_j{f(z_j){w_{jk}}}+b_k
+z_k=\sum_j{x_j{w_{jk}}}+b_k
 \end{equation}
 
 L'activation du neurone k des sorties sera la sigmoïde de sa pré-activation, il aura donc comme sortie: 
 \begin{equation}
-f(z_k)=\frac{1}{1+e^{-z_k}}=f(\sum_j{f(z_j){w_{jk}}}+b_k)
+f(z_k)=\frac{1}{1+e^{-z_k}}=f(\sum_j{x_j{w_{jk}}}+b_k)
 \end{equation}
 
 Finalement, en notant $\hat{y}_k$ la sortie du neurone k de la couche de sortie, $(\hat{y}_k)_k$ sera la sortie du réseau de neurones NN(i,j,k), on aura les k-équations:
+$$\hat{y}_k=f(z_k)$$
 \begin{equation}
 \hat{y}_k=f(\sum_j{f(\sum_i{x_i{w_{ij}}}+b_j){w_{jk}}}+b_k)
 \end{equation}
@@ -58,6 +59,8 @@ On note $(y_k)_k$ la sortie attendu, associée aux entrées $(x_i)_i$ pour le r�
 \begin{equation}
 E(\hat{y})=\sum_k{\frac{1}{2}(y_k-\hat{y}_k)^2}
 \end{equation}
+
+\newpage
 
 \subsection{Apprentissage - Couche de sortie}
 
@@ -77,15 +80,22 @@ Comme, seul $\hat{y}_k$ dépend de $w_{jk}$, et les elements de la somme dont le
 &=-(y_k-\hat{y}_k)\frac{\partial{\hat{y}_k}}{\partial{w_{jk}}}\\
 &=-(y_k-\hat{y}_k)\frac{\partial{f(z_k)}}{\partial{w_{jk}}}\\
 &=-(y_k-\hat{y}_k)\frac{\partial{f(z_k)}}{\partial{z_k}}\frac{\partial{z_k}}{\partial{w_{jk}}}\\
-&=-(y_k-\hat{y}_k){f(z_k)(1-f(z_k))}\frac{\partial{}}{\partial{w_{jk}}}(\sum_j{f(z_j)w_{jk}}+b_k)\\
-&=-(y_k-\hat{y}_k){f(z_k)(1-f(z_k))}f(z_j)
+\frac{\partial{E(\hat{y})}}{\partial{w_{jk}}}
+&=-(y_k-\hat{y}_k){f'(z_k)}\frac{\partial{}}{\partial{w_{jk}}}(\sum_j{{x_j}w_{jk}}+b_k)
 \end{split}
 \end{equation}
 
-Finalement, il en résulte l'équation de variation de l'erreur $E(\hat{y})$ par rapport au poid $w_{jk}$. Et on en déduit sa variation par rapport au biais $b_k$:
-$$\frac{\partial{E(\hat{y})}}{\partial{w_{jk}}}=-(y_k-\hat{y}_k){f(z_k)(1-f(z_k))}x_j$$
+Finalement, comme "la fonction f est la fonction sigmoid", il en résulte l'équation de variation de l'erreur $E(\hat{y})$ par rapport au poid $w_{jk}$, et par rapport au biais $b_k$:
+$$\frac{\partial{E(\hat{y})}}{\partial{w_{jk}}}=-(y_k-\hat{y}_k)f(z_k)(1-f(z_k))x_j$$
 
-$$\frac{\partial{E(\hat{y})}}{\partial{b_k}}=-(y_k-\hat{y}_k){f(z_k)(1-f(z_k))}$$
+$$\frac{\partial{E(\hat{y})}}{\partial{b_k}}=-(y_k-\hat{y}_k)f(z_k)(1-f(z_k))$$
+
+En d'autres termes, comme $\hat{y}_k=f(z_k)$, on a les nouvelles équations:
+
+$$\frac{\partial{E(\hat{y})}}{\partial{w_{jk}}}=-\hat{y_k}(1-\hat{y_k})(y_k-\hat{y}_k)x_j$$
+
+$$\frac{\partial{E(\hat{y})}}{\partial{b_k}}=-\hat{y_k}(1-\hat{y_k})(y_k-\hat{y}_k)$$
+
 
 \subsection{Apprentissage - Couche cachée}
 
