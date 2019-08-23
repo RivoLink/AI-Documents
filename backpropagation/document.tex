@@ -292,17 +292,10 @@ public class Layer{
 		}
 		return outputs;
 	}
-	
 }
 
-\end{lstlisting}
-
-\newpage
-
-\begin{lstlisting}
 // Network.java
 public class Network{
-	
 	public final float alpha=0.1f;
 	
 	public final int i;
@@ -315,6 +308,16 @@ public class Network{
 		this.outL=new Layer(j,k);
 	}
 	
+	public Network setInput(float... bits){
+		hidL.setInputs(bits);
+		return this;
+	}
+	
+	public float[] getOutputs(){
+		float[] x=hidL.getOutputs();
+		return outL.setInputs(x).getOutputs();
+	}
+
 	public void train(float[] inputs,int[] target){
 		float[] yhat=setInput(input).getOutputs();
 		float[] x=hidL.getOutputs();
@@ -344,19 +347,55 @@ public class Network{
 			}
 		}
 	}
-
-	public Network setInput(float... bits){
-		hidL.setInputs(bits);
-		return this;
-	}
-	
-	public float[] getOutputs(){
-		float[] x=hidL.getOutputs();
-		return outL.setInputs(x).getOutputs();
-	}
-	
 }
 
 \end{lstlisting}
+
+\newpage
+
+\section{Backpropagation - Apprentissage Profond}
+
+En apprentissage profond, ou "Deep Learning", on ne se contente pas d'une ou deux couches cachées, il peut etre question de cent, cinq cent ou meme mille couches cachées, d'où vient l'appellation "profond".
+
+
+\subsection{Apprentissage Profond - Les entrées}
+
+En apprentissage profond, vu le nombre de couches cachées, la mise à jour des poids n'est plus chose aisée.
+Supposons qu'on aie j,k,l,...,q couches cachées, les q-entrées $(x_q)_q)$ de la couche de sortie seront données par les q-equations suivantes:
+
+$$z_q=\sum_p{f(... \sum_k{f(\sum_j{f(\sum_i{x_iw_{ij}}+b_j)w_{jk}}+b_k)w_{kl}}+b_l ...)w_{pq}}+b_q$$
+
+En effet, 
+\begin{align*}
+z_j&=\sum_i{x_iw_{ij}}+b_j\\
+z_k&=\sum_j{f(z_j)w_{jk}}+b_k\\
+z_l&=\sum_k{f(z_k)w_{kl}}+b_l\\
+...&=...\\
+z_q&=\sum_p{f(z_p)w_{pq}}+b_q
+\end{align*}
+
+\subsection{Apprentissage Profond - Poids}
+Ayant la variation de l'erreur de prediction $E(\hat{y})$ par rapport au poids $(w_{ij})=)_i$ des j-neurones de la premiere couche cachée, toutes les autres variation s'en decoulent, alors:
+
+\smallbreak
+
+Avec,
+$$x_k=f(z_k), z_k=\sum_j{f(z_j)w_{jk}}+b_k$$
+
+On a:
+\begin{align*}
+\frac{\partial{E(\hat{y})}}{\partial{w_{ij}}}&=-\sum_q{(y_k-\hat{y}_q)}{f'(z_q)}{w_q}{f'(z_p)}...{f'(z_k)}{w_k}{f'(z_j)}{w_j}{f'(z_i)}x_i\\
+\frac{\partial{E(\hat{y})}}{\partial{b_i}}&=-\sum_q{(y_k-\hat{y}_q)}{f'(z_q)}{w_q}{f'(z_p)}...{f'(z_k)}{w_k}{f'(z_j)}{w_j}{f'(z_i)}
+\end{align*}
+
+\newpage
+
+En effet,
+
+\begin{align*}
+\frac{\partial{E(\hat{y})}}{\partial{w_{ij}}}&=-\sum_q{(y_q-\hat{y}_q)\frac{\partial{\hat{y}_q}}{\partial{w_{ij}}}}\\
+&=-\sum_q{(y_k-\hat{y}_q)\frac{\partial{f(z_q)}}{\partial{w_{ij}}}}\\
+\frac{\partial{E(\hat{y})}}{\partial{w_{ij}}}&=-\sum_q{(y_q-\hat{y}_q)\frac{\partial{f(z_q)}}{\partial{z_q}}\frac{\partial{z_q}}{\partial{x_p}}\frac{\partial{x_p}}{\partial{z_p}}...\frac{\partial{x_k}}{\partial{z_k}}\frac{\partial{z_k}}{\partial{x_j}}\frac{\partial{x_j}}{\partial{z_j}}\frac{\partial{z_j}}{\partial{w_{ij}}}}
+\end{align*}
 
 \end{document}
