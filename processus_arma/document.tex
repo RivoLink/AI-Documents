@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{french}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{intro}{Introduction}[section]
+\newtheorem{definition}{Definition}[section]
+
+\title{Série Temporelle - De la théorie à la pratique.}
+
+\author{ANDRIAMANANA H. Rivo Hery}
+
+\begin{document}
+
+\maketitle
+
+\section{Serie Temporelle - La Théorie}
+
+\subsection{Auto-Regression (AR)}
+
+\begin{definition}
+Un processus $(X_t)$ est Auto-Regressif quand sa valeur à l'instant t n'est expliquée que par ses anciennes valeurs $(X_{t-1},...,X_{t-i})$ où $i\in\{2,...,\infty\}$ et non par d'autres processus.
+$$X_t=\phi_1{X_{t-1}}+...+\phi_i{X_{t-i}}+\epsilon_t \quad ,i\in\{2,...,\infty\}$$
+où les $\epsilon_t$ sont des bruits blancs, indépendants et identiquement distribués, notés $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
+\end{definition}
+
+\begin{definition}[Ordre d'un AR]
+Un processus AR est d'ordre p, noté AR(p), quand sa valeur à l'instant t est expliquée par ses p anciennes valeurs: 
+$$X_t=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\epsilon_t$$
+où $\forall t, \; \epsilon_t \rightarrow iid(0,\sigma^2)$.
+\end{definition}
+
+\begin{definition}[Opérateur de retard]
+Pour une série temporelle $(X_t)_t$, on définit l'opérateur de retard, noté L, par une application qui à chaque élément $X_t$ de la série, associe son observation précédente $X_{t-1}$:
+$$LX_t=X_{t-1} \quad \forall t \ge 1 $$
+En particulier, $L^i(X_t)=X_{t-i}$.
+\end{definition}
+
+\begin{definition}[Polynome caractéristique]
+Ayant définit l'opérateur de retard, on peut l'utiliser dans la définition d'un processus AR(p).
+\newline
+Alors, si $(X_t)_t$ est un AR(p), alors, on définit le polynome caractéristique $\Phi$ d'un processus AR(p) de tel sorte que: $\Phi(L){X_t}=\epsilon_t$,
+$$\Phi(L)=1-\phi_1{L^1}+...+\phi_p{L^p}$$
+\end{definition}
+
+\begin{definition}[Équation caractéristique]
+On appelle équation caracteristique d'un processus AR(p), l'équation déduit de $\Phi$ en remplacant L par x:
+$$(1-\phi_1{x^1}+...+\phi_p{x^p})$$
+\end{definition}
+
+\newpage
+
+\subsection{Moyenne Mobile (MA)}
+
+\begin{intro}
+Une moyenne est dite mobile lorsqu'elle est recalculée de façon continue, en utilisant à chaque calcul un sous-ensemble d'éléments dans lequel un nouvel élément remplace le plus ancien ou s'ajoute au sous-ensemble. 
+\end{intro}
+
+\begin{definition}
+Un processus est une Moyenne Mobile lorsqu'il est de la forme:
+$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_i{\epsilon_{t-i}}+\epsilon_t \quad ,i\in\{2,...,\infty\}$$
+où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
+\end{definition}
+
+\begin{definition}[Ordre d'un MA]
+Un processus MA est d'ordre q, noté MA(q), quand sa valeur à l'instant t est expliquée par ses q anciennes valeurs: 
+$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t$$
+où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
+\end{definition}
+
+\begin{definition}[Polynome caractéristique]
+Le polynome caractéristique $\Theta$ d'un processus MA(q) est definit de tel sorte que: $X_t=\Theta(L)\epsilon_t$,
+$$\Theta(L)=1+\theta_1{L^1}+...+\theta_q{L^q}$$
+\end{definition}
+
+\subsection{Auto-Regression et Moyenne Mobile (ARMA)}
+
+\begin{definition}
+Un processus ARMA $(X_t)_t$ est comme son nom l'indique, un processus auto-regessif et moyenne mobile. Il a une partie AR(p) et une partie MA(q) et est noté ARMA(p,q) selon la définition:
+$$X_t:=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t$$
+où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
+\end{definition}
+
+\newpage
+
+\section{Serie Temporelle - La Pratique}
+
+
+
+\end{document}
