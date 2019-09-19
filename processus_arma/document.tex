@@ -1,9 +1,12 @@
 \documentclass{article}
 
-\usepackage{amsmath}
 \usepackage[utf8]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+
 \usepackage{french}
 
+\newtheorem*{asavoir}{A savoir}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{intro}{Introduction}[section]
 \newtheorem{definition}{Definition}[section]
@@ -21,36 +24,38 @@
 \subsection{Auto-Regression (AR)}
 
 \begin{definition}
-Un processus $(X_t)$ est Auto-Regressif quand sa valeur à l'instant t n'est expliquée que par ses anciennes valeurs $(X_{t-1},...,X_{t-i})$ où $i\in\{2,...,\infty\}$ et non par d'autres processus.
-$$X_t=\phi_1{X_{t-1}}+...+\phi_i{X_{t-i}}+\epsilon_t \quad ,i\in\{2,...,\infty\}$$
+Un processus $(X_t)$ est Auto-Regressif quand sa valeur à l'instant t n'est expliquée que par ses anciennes valeurs $(X_{t-1},...,X_{t-i})$, où $i\in\{2,...,\infty\}$ et non par d'autres processus.
+$$X_t=\phi_1{X_{t-1}}+...+\phi_i{X_{t-i}}+\epsilon_t, \quad i\in\{2,...,\infty\},$$
 où les $\epsilon_t$ sont des bruits blancs, indépendants et identiquement distribués, notés $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
 \end{definition}
 
 \begin{definition}[Ordre d'un AR]
 Un processus AR est d'ordre p, noté AR(p), quand sa valeur à l'instant t est expliquée par ses p anciennes valeurs: 
-$$X_t=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\epsilon_t$$
-où $\forall t, \; \epsilon_t \rightarrow iid(0,\sigma^2)$.
+$$X_t=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\epsilon_t,$$
+où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
 \end{definition}
 
 \begin{definition}[Opérateur de retard]
 Pour une série temporelle $(X_t)_t$, on définit l'opérateur de retard, noté L, par une application qui à chaque élément $X_t$ de la série, associe son observation précédente $X_{t-1}$:
-$$LX_t=X_{t-1} \quad \forall t \ge 1 $$
+$$LX_t=X_{t-1}, \quad \forall t>1.$$
 En particulier, $L^i(X_t)=X_{t-i}$.
+\end{definition}
+
+\begin{definition}[Opérateur de différenciation]
+Pour une série temporelle $(X_t)_t$, on définit l'opérateur de différenciation, noté $\nabla$, par une application qui à chaque élément $X_t$ de la série, associe la différence $X_t-X_{t-1}$:
+$$\nabla{X_t}=X_t-X_{t-1}, \quad \forall t>1.$$
 \end{definition}
 
 \begin{definition}[Polynome caractéristique]
 Ayant définit l'opérateur de retard, on peut l'utiliser dans la définition d'un processus AR(p).
 \newline
-Alors, si $(X_t)_t$ est un AR(p), alors, on définit le polynome caractéristique $\Phi$ d'un processus AR(p) de tel sorte que: $\Phi(L){X_t}=\epsilon_t$,
-$$\Phi(L)=1-\phi_1{L^1}+...+\phi_p{L^p}$$
+Ainsi, si $(X_t)_t$ est un AR(p), alors, on définit le polynome caractéristique $\Phi$ d'un processus AR(p) de tel sorte que: $\Phi(L){X_t}=\epsilon_t$,
+$$\Phi(L)=1-\phi_1{L^1}+...+\phi_p{L^p}.$$
 \end{definition}
 
 \begin{definition}[Équation caractéristique]
 On appelle équation caracteristique d'un processus AR(p), l'équation déduit de $\Phi$ en remplacant L par x:
-$$(1-\phi_1{x^1}+...+\phi_p{x^p})$$
-\end{definition}
-
-\newpage
+$$(1-\phi_1{x^1}+...+\phi_p{x^p}).$$\end{definition}
 
 \subsection{Moyenne Mobile (MA)}
 
@@ -60,33 +65,83 @@ Une moyenne est dite mobile lorsqu'elle est recalculée de façon continue, en u
 
 \begin{definition}
 Un processus est une Moyenne Mobile lorsqu'il est de la forme:
-$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_i{\epsilon_{t-i}}+\epsilon_t \quad ,i\in\{2,...,\infty\}$$
+$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_i{\epsilon_{t-i}}+\epsilon_t, \quad i\in\{2,...,\infty\},$$
 où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
 \end{definition}
 
 \begin{definition}[Ordre d'un MA]
 Un processus MA est d'ordre q, noté MA(q), quand sa valeur à l'instant t est expliquée par ses q anciennes valeurs: 
-$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t$$
+$$X_t=\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t,$$
 où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
 \end{definition}
 
 \begin{definition}[Polynome caractéristique]
 Le polynome caractéristique $\Theta$ d'un processus MA(q) est definit de tel sorte que: $X_t=\Theta(L)\epsilon_t$,
-$$\Theta(L)=1+\theta_1{L^1}+...+\theta_q{L^q}$$
+$$\Theta(L)=1+\theta_1{L^1}+...+\theta_q{L^q}.$$
 \end{definition}
 
 \subsection{Auto-Regression et Moyenne Mobile (ARMA)}
 
 \begin{definition}
 Un processus ARMA $(X_t)_t$ est comme son nom l'indique, un processus auto-regessif et moyenne mobile. Il a une partie AR(p) et une partie MA(q) et est noté ARMA(p,q) selon la définition:
-$$X_t:=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t$$
+$$X_t:=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t,$$
 où $\epsilon_t \rightarrow iid(0,\sigma^2), \; \forall t$.
+\end{definition}
+
+\begin{definition}[Stationnarité faible]
+Un processus $(X_t)_t$ est faiblement stationnaire si: $\forall t$, $\forall h<t$;
+\begin{itemize}
+\item $E(X_t)=\mu$, l'esperence est constante au cours du temps.
+\item $Var(X_t)=\sigma^2<\infty$, la variance est constante et non infinie.
+\item $Cov(X_t,X_{t-h})=\gamma(h)$, l'auto-corrélation entre $X_t$ et $X_{t-h}$ reste constante et ne dépend que de h.
+\end{itemize}
+\end{definition}
+
+\begin{definition}[Stationnarité forte]
+Un processus $(X_t)_t$ est fortement stationnaire si: $\forall t$, $\forall h$; $(X_1,X_2,...,X_t)$ et $(X_{1+h},X_{2+h},...,X_{t+h})$ ont même lois en probabilité.
+\end{definition}
+
+\begin{definition}[Auto-Corrélation (ACF)]
+La fonction d'auto-corrélation est définie par:
+$$\rho(h)=\frac{\gamma(h)}{\gamma(0)}=\frac{E[(X_t-\mu)(X_{t+h}-\mu)]}{\sigma^2}.$$
+
+
 \end{definition}
 
 \newpage
 
 \section{Serie Temporelle - La Pratique}
 
+\begin{intro}
+En analyse théorique, l'étude d'une série temporelle commence par sa forme théorique. Par exemple, l'étude d'un processus ARMA(p,q) $(X_t)_t$ débute par sa forme:
 
+$$X_t=\phi_1{X_{t-1}}+...+\phi_p{X_{t-p}}+\theta_1{\epsilon_{t-1}}+...+\theta_p{\epsilon_{t-q}}+\epsilon_t,$$
+où les $\phi_i$ et $\theta_j$ sont sont des constantes données $\forall i<p, \; \forall j<q$.
+\newline
+
+Par contre, l'analyse pratique d'une série temporelle débute par un tableau de données, et grâce à ces données, on essaie d'estimer les paramètres du processus, et de déterminer les propriétés des résidus.
+
+\end{intro}
+\begin{asavoir}[p-value]
+En test statistique, le p-value est une critère d'acceptation de l'hypothèse nulle $(H_0)$:
+\begin{itemize}
+\item si $p>0.10$, aucune signification, $(H_0)$ acceptee
+\item si $p\leq0.10$, asymptotiquement significative, $(H_0)$ acceptee
+\item si $p\leq0.05$, significative, $(H_0)$ rejetee
+\item si $p\leq0.01$, tres significative, $(H_0)$ rejetee.
+\end{itemize}
+\end{asavoir}
+
+\begin{asavoir}[Teste de Dickey-Fuller Augmenté - ADF]
+Le test ADF est un test de racine unitaire:
+\newline
+$(H_0):$ Le processus admet une racine unitaire (non stationnaire)
+\newline
+$(H_1):$ Le processus est stationnaire.
+\newline
+Package: library('tseries')
+\newline
+Utilisation: adf.test(...)
+\end{asavoir}
 
 \end{document}
