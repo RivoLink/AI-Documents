@@ -6,6 +6,26 @@
 
 \begin{document}
 
+\vspace*{\fill}
+\begingroup
+\centering
+
+Q-Learning
+
+\vspace{3mm}
+Processus d'Apprentissage basé sur un MDP
+
+\vspace{5mm} 
+Cet article necessite des base en Apprentissage Automatique, et en Reseau de Neurones Artificiels
+
+\vspace{5mm} 
+rivo.link@gmail.com
+
+\endgroup
+\vspace*{\fill}
+
+\newpage
+
 \section{Markov Decision Process (MDP)}
 
 D'après Wikipédia: Un processus de décision markovien est un processus de contrôle stochastique discret. À chaque étape, le processus est dans un certain état \textbf{s} et l'agent choisit une action \textbf{a}. La probabilité que le processus arrive à l'état \textbf{s'} est déterminée par l'action choisie. Plus précisément, elle est décrite par la fonction de transition d'états \textbf{T(s,a,s')}. Donc, l'état \textbf{s'} dépend de l'état actuel \textbf{s} et de l'action \textbf{a} sélectionnée par le décideur. Cependant, pour un état \textbf{s} et une action \textbf{a}, le prochain état est indépendant des actions et états précédents. On dit alors que le processus satisfait la propriété de Markov. 
@@ -23,16 +43,16 @@ La Q-Function est la base du Q-Learning. Pour un etat \textbf{s} et une action \
 
 \subsection{Policy}
 
-La Politique $\pi$ a l'etat \textbf{s} est la facon de choisir l'action \textbf{a} qui maximise la recompense esperée \textbf{Q(s,a)}. C'est a dire, si on est a l'etat \textbf{s} et qu'on choisi l'action \textbf{a} selon la politique $\pi$, alors, on aura une recompense optimale.
+La Politique $\boldsymbol{\pi}$ à l'etat \textbf{s} est la facon de choisir l'action \textbf{a} qui maximise la recompense esperée \textbf{Q(s,a)}. C'est a dire, si on est à l'etat \textbf{s} et qu'on choisi l'action \textbf{a} selon la politique $\boldsymbol{\pi}$, alors, on aura une recompense optimale.
 $$\pi(s)=argmax_a(Q(s,a))$$
 
 \subsection{Rewards}
 
-La recompense esperée $R_t$ a l'instant t pour un etat $s_t$ et une action $a_t$ est la somme des recompenses futures.
+La recompense esperée $\boldsymbol{R_t}$ à l'instant $\textbf{t}$ pour un etat $\boldsymbol{s_t}$ et une action $\boldsymbol{a_t}$ est la somme des recompenses futures.
 $$R_t=Q(s_t,a_t)$$
 $$R_t=r_t+r_{t+1}+r_{t+2}+r_{t+3}+...+r_n$$
 
-Mais, sachant que le processus est stochastique, alors plus on va dans le future, moins les recompenses sont evidentes, ainsi, on introduit un \textbf{facteur de discontinuite} $\gamma$.  
+Mais, sachant que le processus est stochastique, alors plus on va dans le future, moins les recompenses sont evidentes, ainsi, on introduit un \textbf{facteur de discontinuite} $\boldsymbol{\gamma}$.  
 $$R_t=r_t+{\gamma}r_{t+1}+{\gamma^2}r_{t+2}+{\gamma^3}r_{t+3}+...+{\gamma^{n-t}}r_n$$
 
 Ainsi,
@@ -46,7 +66,7 @@ R_t&=r_t+{\gamma}R_{t+1}
 
 \subsection{Optimal Reward}
 
-La recompense à l'instant t et à l'etat $s_t$, en choidissant l'action $a_t$ suivant la polique $\pi$ est donc optimale et a la valeur $Q^{\pi}(s_t,a_t)$.
+La recompense à l'instant $\textbf{t}$ et à l'etat $\boldsymbol{s_t}$, en choidissant l'action $\boldsymbol{a_t}$ suivant la polique $\boldsymbol{\pi}$ est donc optimale et a la valeur $\boldsymbol{Q^{\pi}(s_t,a_t)}$.
 $$Q^{\pi}(s_t,a_t)=r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})}$$
 
 On peut aussi ecrire:
@@ -62,43 +82,33 @@ Q^{\pi}(s_t,a_t)&=r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})}
 \end{split}
 \end{equation}
 
-\subsection{Loss}
-L'erreur est un element très important en intelligence artificielle.
+\section{Q-Function}
 
+Sachant que, pour un etat $\textbf{s}$ et une action $\textbf{a}$, la q-fonction donne la recompense esperée $\textbf{Q(s,a)}$, alors comment est construite cette fonction? 
 
+\subsection{Q-Table}
 
-\newpage
+Pour un nombre fini, assez petit, d'etats et d'actions, la q-function peut etre representée par un tableau ou une matrice, dont les etats forment les lignes, et les actions forment les colonnes.
+\newline
 
-$$Q(s,a)=max_{a'}{R(s,a')}$$
-$$Q(s_t,a_t)=r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})}$$
+Chaque cellule du tableau est initialisée aléatoirement. Puis, mis à jour à chaque étape $\textbf{t}$ du processus selon la formule ci-dessous, où $\boldsymbol{\alpha}$ est appelée $\textbf{facteur d'apprentissage}$.
+$$Q(s_t,a_t) \leftarrow Q(s_t,a_t) + \alpha (r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})})$$
 
-En effet, 
-
-\begin{equation}
-\begin{split}
-R_t&=r_t+{\gamma}r_{t+1}+{\gamma^2}r_{t+2}+{\gamma^3}r_{t+3}+...+{\gamma^{n-t}}r_n \\
-&=r_t+{\gamma}(r_{t+1}+{\gamma}r_{t+2}+{\gamma^2}r_{t+3}+...+{\gamma^{n-(t+1)}}r_n) \\
-&=r_t+{\gamma}R_{t+1} \\
-\\
-maxR_t&=max(r_t+{\gamma}R_{t+1}) \\
-&=r_t+{\gamma}max(R_{t+1}) \\
-\\
-Q(s_t,a_t)&=r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})}
-\end{split}
-\end{equation}
-
+Selon ce formule, noter bien qu'à l'etat $\boldsymbol{s_t}$, pour tous les actions possibles, il y a une qui, etant choissie, donne une recompense qui tend vers la recompense optimale. On contruit donc en même temps la politique $\boldsymbol{\pi}$ à l'etat $\boldsymbol{s_t}$.
 
 \newpage
-A l'instant \textbf{t}, le processus etant a l'etat \textbf{$s_t$}, en choisissant l'action \textbf{a}, le processus arrive a l'etat \textbf{$s_{t+1}$} et gagne une recompense \textbf{$R_t$}.
 
-$$R_t=r_t+r_{t+1}$$
+\subsection{Deep Q-Function}
 
+La plus part du temps, le nombre d'etats et d'actions est assez conséquent tel qu'utiliser la q-table demande trop de ressources et n'est plus optimal.
+\newline
 
+Dans ce cas, un reseaux de neurones artificiels serai un moyen plus efficace de representé la q-function. Ce resaux demanderai un couple etat-action en entrée, et predirait la valeur de la recompense esperée en sortie.
+\newline
 
+Chaque poids des neurons du reseau sera initialisé aléatoirement et, comme dit perecedement, les targets sont les recompenses esperée. Et à l'etape $\textbf{t}$ du processus, le \textbf{loss} sera alors defini comme suit:
+$$loss = (\underbrace{r_t + \gamma \max_{a_{t+1}} Q'(s_{t+1},a_{t+1})}_{target} – \underbrace{Q(s_t,a_t)}_{prediction})^2$$
 
-Il utilise le modèle MDP a n-etapes (fini) telle pour un état \textbf{s} et un action \textbf{a}, \textbf{Q(s,a)} représente l'optimum des récompenses futurs.
-
-
-$$loss = (\underbrace{r + \gamma \max_{a’} Q'(s’, a’)}_{target} – \underbrace{Q(s, a)}_{prediction})^2$$
+Un variant de ce reseau est un reseau qui attendrai un etat en entrée, et predirait en sorti un vecteur où chaque composante represente la recompense esperée d'une action. L'action optimal serai alors associée à la composante maximale.
 
 \end{document}
