@@ -16,9 +16,6 @@ Q-Learning
 Processus d'Apprentissage basé sur un MDP
 
 \vspace{5mm} 
-Cet article necessite des base en Apprentissage Automatique, et en Reseau de Neurones Artificiels
-
-\vspace{5mm} 
 rivo.link@gmail.com
 
 \endgroup
@@ -43,7 +40,7 @@ La Q-Function est la base du Q-Learning. Pour un etat \textbf{s} et une action \
 
 \subsection{Policy}
 
-La Politique $\boldsymbol{\pi}$ à l'etat \textbf{s} est la facon de choisir l'action \textbf{a} qui maximise la recompense esperée \textbf{Q(s,a)}. C'est a dire, si on est à l'etat \textbf{s} et qu'on choisi l'action \textbf{a} selon la politique $\boldsymbol{\pi}$, alors, on aura une recompense optimale.
+La Politique $\boldsymbol{\pi}$ à l'etat \textbf{s} est la facon de choisir l'action \textbf{a} qui maximise la recompense esperée \textbf{Q(s,a)}. C'est a dire, si on est à l'etat \textbf{s} et qu'on choisi l'action \textbf{a} selon la politique $\boldsymbol{\pi}$, alors, on pourrai espérer une recompense optimale.
 $$\pi(s)=argmax_a(Q(s,a))$$
 
 \subsection{Rewards}
@@ -66,7 +63,7 @@ R_t&=r_t+{\gamma}R_{t+1}
 
 \subsection{Optimal Reward}
 
-La recompense à l'instant $\textbf{t}$ et à l'etat $\boldsymbol{s_t}$, en choidissant l'action $\boldsymbol{a_t}$ suivant la polique $\boldsymbol{\pi}$ est donc optimale et a la valeur $\boldsymbol{Q^{\pi}(s_t,a_t)}$.
+La recompense esperée à l'instant $\textbf{t}$ et à l'etat $\boldsymbol{s_t}$, en choidissant l'action $\boldsymbol{a_t}$ suivant la polique $\boldsymbol{\pi}$ est donc optimale et a la valeur $\boldsymbol{Q^{\pi}(s_t,a_t)}$.
 $$Q^{\pi}(s_t,a_t)=r_t+{\gamma}max_{a_{t+1}}{Q(s_{t+1},a_{t+1})}$$
 
 On peut aussi ecrire:
