@@ -30,7 +30,10 @@
 L'Analyse en Composante Pricipale s'interesse à l'etude des tableaux de données rectangulaires dont les colonnes sont appelées \textit{Variables} et les lignes sont appelées \textit{Individus}.
 \newline
 
-L'image ci-dessous illustre un tableau de donnees a \textit{p-Variables} et a \textit{n-Individus}. Un individu est noté $X_i=(x_{i1},x_{i2}, ... ,x_{ij}, ... ,x_{ip})$ où $i=1..n$.
+L'image ci-dessous illustre un tableau de donnees a \textit{p-variables} et a \textit{n-individus}. Un \textit{individu} est noté $X_i=(x_{i1},x_{i2}, ... ,x_{ij}, ... ,x_{ip})$ où $i=1..n$.
+\newline
+
+\underline{NB:} Il est important de souligner que les \textit{variables} sont \textbf{quantitatives} en ACP, c'est à dire que $x_{ij} \in \mathbb{R}, \; \forall (i,j) \in [n]\times[p].$
 
 \begin{figure}[h!]
 \includegraphics[width=\linewidth]{images/tableau.png}
@@ -38,18 +41,35 @@ L'image ci-dessous illustre un tableau de donnees a \textit{p-Variables} et a \t
 
 \subsubsection{Moyenne et Variance}
 
-Pour une \textit{variable} ${x_k}$, on note sa moyenne $\bar{x_k}$ et sa variance $\sigma_k$ telles que:
+Pour une \textit{variable} ${X_j}$, on note sa moyenne $\bar{x_j}$ et sa variance $\sigma_j$ telles que:
 
 \begin{equation*}
-\bar{x_k}=\frac{1}{n}\sum_{i=1}^{n}{x_{ik}} \;\;\;\;\;\;\;\;\;\;\;\; \sigma_k=\frac{1}{n}\sum_{i=1}^{n}{(x_{ik}-\bar{x_{k}})^2}
+\bar{x_j}=\frac{1}{n}\sum_{i=1}^{n}{x_{ij}} \;\;\;\;\;\;\;\;\;\;\;\; \sigma_k=\frac{1}{n}\sum_{i=1}^{n}{(x_{ij}-\bar{x_{j}})^2}
 \end{equation*}
 
-\subsubsection{Distance et Centre de Gravité}
-
-On define la distance d entre deux \textit{individus} $i$ et $j$ par:
+\subsubsection{Distance et Point moyen}
+En ACP, il est important de savoir quels \textit{individus} sont proches les un des autres, pour pouvoir, si possible, creer des groupes d'\textit{individus} selon leur proximité. Il est alors necessaire de definir une distance entre deux \textit{individus} i et i', soit d cette distance:
 
 \begin{equation*}
-d^2(i,j)=\sum_{k=1}^{p}{(x_{ik}-x_{jk})^2} 
+d^2(i,i')=\sum_{j=1}^{p}{(x_{ij}-x_{i'j})^2} 
+\end{equation*}
+
+\newpage
+
+De plus, à partir de la moyenne de chaque \textit{variables}, on contruit un point noté G et appelé \textbf{point moyen} du nuage des \textit{individus}:
+
+\begin{equation*}
+G=(\bar{x_1},\bar{x_2},...,\bar{x_p})
+\end{equation*}
+
+\subsubsection{Centrer et Reduire}
+Ayant le point moyen, qui peut etre vue comme le centre de gravité du nuage, il est conseillé de translater notre nuage de telle facon que G soit confondue avec le centre du repere, cela ce traduit par; ``Replacer $x_j$ par $x_{ij}-\bar{x}_j$ dans le tableau de données'':
+\newline
+
+Cette processus s'appele \textbf{centrage} et elle ameliore grandement l'affichage et l'interpretation des graphiques de nos données.
+
+\begin{equation*}
+x_{ij} \leftarrow x_{ij}-\bar{x}_j \;\; \forall i \in [n], \; \forall j \in [p], 
 \end{equation*}
 
 
