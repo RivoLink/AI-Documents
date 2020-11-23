@@ -41,10 +41,10 @@ L'image ci-dessous illustre un tableau de donnees a \textit{n-individus} et a \t
 
 \subsubsection{Moyenne et Variance}
 
-Pour une \textit{variable} ${x_j}$, on note sa moyenne $\bar{x}_j$ et sa variance $\sigma_j$ telles que:
+Pour une \textit{variable} ${x_j}$, on note sa moyenne $\bar{x}_j$ et son écart-type $s_j$ telles que:
 
 \begin{equation*}
-\bar{x}_j=\frac{1}{n}\sum_{i=1}^{n}{x_{ij}} \;\;\;\;\;\;\;\;\;\; \sigma_k=\frac{1}{n}\sum_{i=1}^{n}{(x_{ij}-\bar{x}_j)^2}
+\bar{x}_j=\frac{1}{n}\sum_{i=1}^{n}{x_{ij}} \;\;\;\;\;\;\;\;\;\; s_j=\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(x_{ij}-\bar{x}_j)^2}}
 \end{equation*}
 
 \subsubsection{Distance et Point moyen}
@@ -56,7 +56,7 @@ d^2(i,i')=\sum_{j=1}^{p}{(x_{ij}-x_{i'j})^2}
 
 \newpage
 
-De plus, à partir de la moyenne de chaque \textit{variables}, on construit un point noté G et appelé \textbf{point moyen} du nuage des \textit{individus}:
+De plus, à partir de la moyenne de chaque \textit{variables}, on construit un point noté G et appelé \textbf{point moyen} du nuage des \textit{individus}, ce point peut etre interpreté comme le centre de gravité du nuage des \textit{individus}:
 
 \begin{equation*}
 G=(\bar{x}_1,\bar{x}_2,...,\bar{x}_p)
@@ -76,22 +76,54 @@ x_{ij} \leftarrow x_{ij}-\bar{x}_j \;\;\;\;\; \forall i \in [n], \; \forall j \i
 Parfois, les \textit{variables} ne sont du même unité, ceci peut entrainer une ambiguïté dans l'interprétation des données, en effet, une variable a une ``quantité'' plus petite, dans le tableau, lorsqu'elle est exprimé en mettre, que lorsqu'elle est exprimé en centimètre. Ce qui peut entrainer, respectivement aux unités, une faible ou une forte importance par rapport aux autres variables qui faussera alors l'analyse.
 \newline
 
-Un moyen efficace d'eviter ce probleme est la \textbf{reduction}, elle consiste a diviser les \textit{variables} par leur variance.
+Un moyen efficace d'eviter ce probleme est la \textbf{reduction}, elle consiste a diviser les \textit{variables} par leur écart-type.
 \newline
 
-Comme on a convenu plutot qu'il est preferable de centrer les \textit{variables}, alors le \textbf{centrage} et la \textbf{reduction} se traduit par: ``Replacer $x_j$ par $(x_{ij}-\bar{x}_j)/\sigma_j$ dans le tableau de données'';
+Comme on a convenu plutot qu'il est preferable de centrer les \textit{variables}, alors le \textbf{centrage} et la \textbf{reduction} se traduit par: ``Replacer $x_j$ par $(x_{ij}-\bar{x}_j)/s_j$ dans le tableau de données'';
 
 \begin{equation*}
-x_{ij} \leftarrow \frac{x_{ij}-\bar{x}_j}{\sigma_j}  \;\;\;\;\; \forall i \in [n], \; \forall j \in [p]
+x_{ij} \leftarrow \frac{x_{ij}-\bar{x}_j}{s_j}  \;\;\;\;\; \forall i \in [n], \; \forall j \in [p]
 \end{equation*}
 \newline
 
 \underline{NB:} Apres le centrage et la reduction, nos nouvelles \textit{variables} sont alors ``asymptotiquement'' de moyenne nulle et de variance egale a un. c'est a dire:
 
 \begin{equation*}
-\bar{x}_j \approx 0 \;\;\;\;\; \sigma_j \approx 1 \;\;\;\;\; \forall j \in [p]
+\bar{x}_j \approx 0 \;\;\;\;\; s_j^2 \approx 1 \;\;\;\;\; \forall j \in [p]
 \end{equation*}
 
+\subsubsection{Inertie}
+
+Par definition, l'inertie \textit{I} des données est:
+
+\begin{equation*}
+I = \frac{1}{n} \sum_{i=1}^n \sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2
+\end{equation*}
+
+C'est donc, au coefficient 1/n pres, la somme des carrés de toutes les cellules du tableau de données apres centrage et reduction, mais elle peut egalement etre interpretée par rapport aux \textit{individus} et aux \textit{variables}.
+
+\newpage
+
+\begin{flushleft}
+\textbf{Inertie et Individus}
+\end{flushleft}
+
+Soit l'individu $i \in [n]$, la quantité $\sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ de l'inertie represente la distance entre cet individue et le point moyen G. Par conséquent, l’inertie peut etre vue comme la somme des carres des distances au centre de gravite pour tous les individus.
+\newline
+
+Ainsi, l’inertie renseigne sur la ``forme'' du nuage des individus. En effet, plus la distance entre les individus sont grande (resp. petite), plus l'inertie est grande (resp. petite).
+
+\begin{flushleft}
+\textbf{Inertie et Variables}
+\end{flushleft}
+
+Dans la definition de l'inertie, les deux somme $\sum$ peuvent etre interverti, ainsi, on a une autre expression:
+
+\begin{equation*}
+I = \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2
+\end{equation*}
+
+Ici, on peut remarquer que la quantité $\sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ correspond au carré de la norme de la variable centrée reduite $x_j$ ou $j \in [p]$.
 
 \newpage
 
