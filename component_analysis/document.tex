@@ -13,6 +13,8 @@
 
 \usepackage{graphicx}
 
+\input{insbox}
+
 \usepackage{hyperref}
 \hypersetup{
     colorlinks=true,
@@ -30,7 +32,7 @@
 L'Analyse en Composante Pricipale s'interesse à l'etude des tableaux de données rectangulaires dont les lignes sont appelées \textit{Individus} et les colonnes sont appelées \textit{Variables}.
 \newline
 
-L'image ci-dessous illustre un tableau de donnees a \textit{n-individus} et a \textit{p-variables}. Un \textit{individu} est noté $i=(x_{i1},x_{i2}, ... ,x_{ip})$ et une \textit{variable} est notée $x_j=(x_{1j},x_{2j}, ... ,x_{nj})$
+L'image ci-dessous illustre un tableau de donnees a \textit{n-individus} et a \textit{p-variables}. Un \textit{individu} est noté $i=(x_{i1},x_{i2}, ... ,x_{ip}) \in \mathbb{R}^p$ et une \textit{variable} est notée $x_j=(x_{1j},x_{2j}, ... ,x_{nj}) \in \mathbb{R}^n$
 \newline
 
 \underline{NB:} Il est important de souligner que les \textit{variables} sont \textbf{quantitatives} en ACP, c'est à dire que $x_{ij} \in \mathbb{R}, \; \forall (i,j) \in [n]\times[p].$
@@ -123,7 +125,68 @@ Dans la definition de l'inertie, les deux somme $\sum$ peuvent etre interverti, 
 I = \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2
 \end{equation*}
 
-Ici, on peut remarquer que la quantité $\sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ correspond au carré de la norme de la variable centrée reduite $x_j$ ou $j \in [p]$.
+Ici, on peut remarquer que la quantité $\sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ correspond au carré de la norme de la variable centrée reduite $x_j$ ou $j \in [p]$. Or cette quantité est egale à n, ainsi, l'inertie est toujour egale au nombre de variables, en effet:
+
+\begin{align*}
+I &= \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2 \\
+  &= \frac{1}{n} \sum_{j=1}^p \left( \frac{1}{s_j^2} \; n{s_j^2} \right) \\  
+  &= \frac{1}{n} \sum_{j=1}^p \left( \frac{1}{s_j^2} \; n{s_j^2} \right) \\
+  &= \frac{1}{n} \sum_{j=1}^p n \\
+  &= \frac{1}{n} \; pn \\
+  &= p
+\end{align*}
+\\
+
+\subsubsection{Représentation Simplifiée}
+
+On a vu que les \textit{variables} sont des vecteurs de $\mathbb{R}^p$, alors, quand $p > 3$, il n'est plus possible de representer les variables. L'ACP vise a fournir une image simplifiée du nuage des \textit{individus} la plus fidele possible, cest a dire, trouver une sous-espace de dimension plus petite qui resume au mieux les données.
+\newline
+
+\newpage
+
+\begin{flushleft}
+\textbf{Comment retrouver la meilleur sous-espace?}
+\end{flushleft}
+
+Pensons pour cela a l’image d’un chameau, la figure ci-dessous propose deux
+representations simplifiees de cette image: des representations en dimension 2, la vue de face et la vue de profil.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=200px]{images/chameau.png}
+\end{figure}
+
+Il est evident de dire que la meilleure representation simplifiee est la vue de profil. La raison est que l’image projetee du chameau dans ce plan est plus proche de l’image initiale dans le sens ou la variabilite des points qui la representent est plus grande et donc restitue mieux la variabilitee des points d’origine en dimension 3.
+\newline
+
+On a alors les etapes suivantes pour retouver analytiquement la meilleure representation simplifiee du nuage des \textit{individus}:
+
+\begin{flushleft}
+Etape 1: \textbf{Trouver l'axe qui deforme le moins possible le nuage}
+\end{flushleft}
+
+On cherche un axe dans $\mathbb{R}^p$ de sorte que les distances entre les points initiaux i (\textit{individu}) soient les plus proches possibles de leurs projetes orthogonaux sur cette axe et cela en tenant compte de tous les autres points. Notons $\vec{u}_1$ la direction de cet axe, et $H_i$ la projetée orthogonale de i.
+\newline
+
+\InsertBoxL{0}{\quad\includegraphics[width=200px]{images/projection.png}\quad} %
+
+Le but est de minimiser la distance $iH_i$, ce qui revient a maximiser la distance $OH_i$
+\newline
+
+Plus formellement, on cherche la direction $\vec{u}_1$ de $\mathbb{R}^p$ telle que $\sum_{i=1}^n OH_i^2$ soit maximum.
+\newline
+
+On dira qu’on cherche $\vec{u}_1$ telle que l’inertie projetee est maximum.
+
+\begin{flushleft}
+Etape 2: \textbf{Trouver le meilleur plan}
+\end{flushleft}
+
+Cette fois ci, on cherche le meilleur plan, on cherche le meilleur axe, qu'on a fait dans l'etape 1, 
+
+
+
+
 
 \newpage
 
