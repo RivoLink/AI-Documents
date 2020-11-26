@@ -27,7 +27,7 @@
 
 \section{La Théorie}
 
-\subsubsection{Tableau de données}
+\subsection{Tableau de données}
 
 L'Analyse en Composante Pricipale s'interesse à l'etude des tableaux de données rectangulaires dont les lignes sont appelées \textit{Individus} et les colonnes sont appelées \textit{Variables}.
 \newline
@@ -41,7 +41,7 @@ L'image ci-dessous illustre un tableau de donnees a \textit{n-individus} et a \t
 \includegraphics[width=\linewidth]{images/tableau.png}
 \end{figure}
 
-\subsubsection{Moyenne et Variance}
+\subsection{Moyenne et Variance}
 
 Pour une \textit{variable} ${x_j}$, on note sa moyenne $\bar{x}_j$ et son écart-type $s_j$ telles que:
 
@@ -49,7 +49,7 @@ Pour une \textit{variable} ${x_j}$, on note sa moyenne $\bar{x}_j$ et son écart
 \bar{x}_j=\frac{1}{n}\sum_{i=1}^{n}{x_{ij}} \;\;\;\;\;\;\;\;\;\; s_j=\sqrt{\frac{1}{n}\sum_{i=1}^{n}{(x_{ij}-\bar{x}_j)^2}}
 \end{equation*}
 
-\subsubsection{Distance et Point moyen}
+\subsection{Distance et Point moyen}
 En ACP, il est important de savoir quels \textit{individus} sont proches les un des autres, pour pouvoir, si possible, creer des groupes d'\textit{individus} selon leur proximité. Il est alors necessaire de definir une distance entre deux \textit{individus} i et i', soit d cette distance:
 
 \begin{equation*}
@@ -64,7 +64,7 @@ De plus, à partir de la moyenne de chaque \textit{variables}, on construit un p
 G=(\bar{x}_1,\bar{x}_2,...,\bar{x}_p)
 \end{equation*}
 
-\subsubsection{Centrage et Réduction}
+\subsection{Centrage et Réduction}
 Ayant le point moyen, qui peut être vue comme le centre de gravité du nuage, il est conseillé de translater notre nuage de telle façon que G soit confondue avec le centre du repère, cela ce traduit par: ``Replacer $x_j$ par $x_{ij}-\bar{x}_j$ dans le tableau de données'';
 \newline
 
@@ -94,7 +94,7 @@ x_{ij} \leftarrow \frac{x_{ij}-\bar{x}_j}{s_j}  \;\;\;\;\; \forall i \in [n], \;
 \bar{x}_j \approx 0 \;\;\;\;\; s_j^2 \approx 1 \;\;\;\;\; \forall j \in [p]
 \end{equation*}
 
-\subsubsection{Inertie}
+\subsection{Inertie}
 
 Par definition, l'inertie \textit{I} des données est:
 
@@ -110,7 +110,7 @@ C'est donc, au coefficient 1/n pres, la somme des carrés de toutes les cellules
 \textbf{Inertie et Individus}
 \end{flushleft}
 
-Soit l'individu $i \in [n]$, la quantité $\sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ de l'inertie represente la distance entre cet individue et le point moyen G. Par conséquent, l’inertie peut etre vue comme la somme des carres des distances au centre de gravite pour tous les individus.
+Soit l'individu $i \in [n]$, la quantité $\sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ de l'inertie represente la distance au carrée entre cet individue et le point moyen G. Par conséquent, l’inertie peut etre vue comme la somme des carres des distances au centre de gravite pour tous les individus.
 \newline
 
 Ainsi, l’inertie renseigne sur la ``forme'' du nuage des individus. En effet, plus la distance entre les individus sont grande (resp. petite), plus l'inertie est grande (resp. petite).
@@ -137,7 +137,7 @@ I &= \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} 
 \end{align*}
 \\
 
-\subsubsection{Représentation Simplifiée}
+\subsection{Représentation Simplifiée}
 
 On a vu que les \textit{variables} sont des vecteurs de $\mathbb{R}^p$, alors, quand $p > 3$, il n'est plus possible de representer les variables. L'ACP vise a fournir une image simplifiée du nuage des \textit{individus} la plus fidele possible, cest a dire, trouver une sous-espace de dimension plus petite qui resume au mieux les données.
 \newline
@@ -176,16 +176,26 @@ Le but est de minimiser la distance $iH_i$, ce qui revient a maximiser la distan
 Plus formellement, on cherche la direction $\vec{u}_1$ de $\mathbb{R}^p$ telle que $\sum_{i=1}^n OH_i^2$ soit maximum.
 \newline
 
-On dira qu’on cherche $\vec{u}_1$ telle que l’inertie projetee est maximum.
+On dira qu’on cherche $\vec{u}_1$ telle que l’inertie projetee $I_p$ est maximum.
 
 \begin{flushleft}
 Etape 2: \textbf{Trouver le meilleur plan}
 \end{flushleft}
 
-Cette fois ci, on cherche le meilleur plan, on cherche le meilleur axe, qu'on a fait dans l'etape 1, 
+Cette fois ci, on cherche le meilleur plan $\mathcal{P}$ ou l'inertie projetee $I_p$ est maximal sur ce plan, pour ce faire, on cherche une direction $\vec{u}_1$ qui maximise $I_p$ (fait à l'etape 1), puis on cherche une autre direction $\vec{u}_2$ orthogonale a $\vec{u}_1$ et qui, elle aussi, maximise $I_p$.
+\newline
 
+Le plan meilleur plan $\mathcal{P}$ est formé par les deux meilleurs axes de directions respectives $\vec{u}_1$ et $\vec{u}_2$, orthogonals l'un a l'autre.
 
+\begin{flushleft}
+Etape 3: \textbf{Trouver un troisieme meilleur axe}
+\end{flushleft}
 
+On peut chercher un troisieme axe et sequentielement, chercher les axes les un apres les autres et a chaque fois, un axe doit etre orthogonal aux axes precedents, et maximise l'inertie projetee $I_p$.
+
+\newpage
+
+\subsection{Correlation}
 
 
 \newpage
@@ -252,7 +262,6 @@ f(V_e)=\frac{(n-1)}{n}*V_e \quad , \; V_e \; est \; la  \; variance \; explicati
 \end{figure}
 
 D'après la graphe de la fonction - variance expliquée - on ne va donc retenir que les deux premières \textit{Variables} qui sont: la \textit{Variable 100m} et la \textit{Variables Longueur}.
-\newline
 
 \newpage
 
@@ -262,12 +271,18 @@ A partir de ces deux \textit{Variables}, on peut positionner les individus dans 
 \includegraphics[width=\linewidth]{images/graph-plan.png}
 \end{figure}
 
-\subsubsection{Interpretation}
+\begin{flushleft}
+\textbf{Interpretation du premier axe}
+\end{flushleft}
 
-\underline{\textbf{Premier Axe}}: On peut remarquer du premier axe qu'elle departage les joueurs ayant un bon classement a ceux qui ont un mauvais classement pendant les deux competitions.
+On peut remarquer du premier axe qu'elle departage les joueurs ayant un bon classement a ceux qui ont un mauvais classement pendant les deux competitions.
 En effet, les joueurs \textbf{Karpov} et \textbf{Clay} qui sont le deuxieme et le troisieme dans le classement des Jeux Olympiques, et des Jeux de Decastar sont placés à droite dans la premier axe alors que le joueur \textbf{Uldal}, avant dernier du classement des JO et le joueur \textbf{Bourguignon}, dernier du classement de Decastar sont placés a gauche dans la premier axe. 
-\newline
-\underline{\textbf{Deuxieme Axe}}: On peut remarquer du deuxieme axe qu'elle departage les joueurs  
+
+\begin{flushleft}
+\textbf{Interpretation du deuxieme axe}
+\end{flushleft}
+
+On peut remarquer du deuxieme axe qu'elle departage les joueurs  
 
 \begin{figure}[h!]
 \includegraphics[width=\linewidth]{images/cercle_cor.png}
