@@ -4,6 +4,7 @@
 
 
 \usepackage[utf8]{inputenc}
+\usepackage{multirow}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -25,7 +26,67 @@
 
 \begin{document}
 
-\section{La Théorie}
+\begin{titlepage}
+
+\begin{center}
+\begin{tabular}{ccc}
+\multirow{7}{*}{\includegraphics[width=0.2\textwidth]{images/Ankatso.png}\hspace{0cm}} & 
+\underline{\large{UNIVERSITE D'ANTANANARIVO}} &
+\multirow{7}{*}{\hspace{0cm}\includegraphics[width=0.2\textwidth]{images/Sciences.png}} \\ & & \\ & 
+\underline{\large{FACULTE DES SCIENCES}} & \\ & \\ & 
+\underline{\large{DEPARTEMENT MATHEMATIQUES}} \\ & & \\ & 
+\underline{\large{ET INFORMATIQUE}} \\
+\end{tabular}
+\end{center}
+
+\vspace{4cm}
+	
+\begin{center}
+\definecolor{darkred}{rgb}{0.8,0,0}
+\huge{\textbf{\textcolor{darkred}{Analyse de Données Multidimensionnelles}}}
+\LARGE{\textbf{\textcolor{darkred}{Théorie et Pratique}}}
+\end{center}
+
+\vspace{3cm}
+
+\begin{flushleft}
+Élaboré par: \\
+\large{ANDRIAMANANA Hajaniaina Rivo Hery} \\
+\large{RAMANANTSOA Zo Samoela Reno} 
+\newline
+
+\large{Mathématiques Appliquées} \\
+\large{\textit{\underline{Spécialité:}}} Combinatoire et Optimisation
+\end{flushleft}
+	
+\vspace{3cm}
+	
+\flushright{\underline{Année universitaire}: 2018-2019}
+
+\end{titlepage}
+
+\tableofcontents
+
+\section{Introduction}
+
+Les méthodes d'analyse de données ont commencées a être développées dans les années 50, poussées par le développement de l'informatique et du stockage des données qui depuis n'a cesse de croitre. L'analyse de données a surtout été développée en France par J.P. Benzecri [Ben80a], [Ben80b] qui a su par l'analyse des correspondances représenter les données de manière simple et interprétante.
+\newline
+
+Aujourd'hui les méthodes d'analyse de données sont employées dans un grand nombre de domaines qu'il est impossible d'énumérer, a l'instar du marketing pour l'étude des marches ou de l'étude des données météorologiques.
+\newline
+
+Les analyses factorielles constituent la plupart des analyses de données. Elles sont fondées sur un principe unique, c'est pour cela que nous pouvons parler de l'analyse factorielle [EP90]. Ce principe repose sur le fait que les deux nuages de points représentant respectivement les lignes et les colonnes du tableau étudié (tableau 1.1) sont construits et représentés sur des graphiques. Ces représentations des lignes et des colonnes fortement liées entre elles permettent une analyse plus aisée pour l'opérateur. Parmi les divers méthodes d'analyse factorielle, on peut citer l'analyse en composantes principales, l'analyse factorielle des correspondances, l'analyse des correspondances multiples et l'analyse factorielle discriminante.
+\newline
+
+Dans ce pressent projet, nous nous intéresserons surtout a l'analyse en composantes principales que nous notons par la suite ACP. C'est une des premières analyses factorielles, et certainement aujourd'hui l'une des plus employées. Dans [LMP95], nous trouvons l'historique de cette méthode qui fut conçue par Karl Pearson en 1901. Elle est sans doute a la base de la compréhension actuelle des analyses factorielles.
+\newline
+
+Son utilisation a cependant été plus tardive avec l'essor des capacités de calculs. Les principales variantes de l'ACP viennent des différences de transformations du tableau de données. Ainsi, le nuage de points peut être centre ou non, réduit ou non.
+Le cas le plus étudié, et que nous présentons ici, est lorsque le nuage de point est centre et réduit ; dans ce cas nous parlons d'ACP normée. D'autres variantes existent telle que l'analyse en composante curviligne [DH97] pour remédier au fait que les projections sont linéaires, ou encore l'analyse en composantes indépendantes pour la séparation de sources [Pha96].
+
+\newpage
+
+\section{Théorie}
 
 \subsection{Tableau de données}
 
@@ -199,7 +260,7 @@ On peut chercher un troisième axe et essentiellement, chercher les axes les un 
 
 \newpage
 
-\section{La pratique}
+\section{Pratique de l'ACP}
 
 \subsection{Données}
 
@@ -315,5 +376,91 @@ Le cercle de corrélation ci-dessous peut nous donner encore plus d'informations
 \begin{itemize}
 \item On remarque que les épreuves \textbf{400m} et \textbf{Longueur} sont très corrélées négativement, c'est a dire que les joueurs meilleurs sur l'un sont mauvais sur l'autre. On peut remarquer dans ce cas le joueur \textbf{Martineau} pendant le Decastar, ou il est très fort en \textbf{400m} mais très mauvais en \textbf{Longueur}, ou le joueur \textbf{Karpov} pendant les JO, qui est très faible en \textbf{400m} mais très fort en \textbf{Longueur}.
 \end{itemize}
+
+\newpage
+
+\section{Pratique de l'AFC}
+\subsection{Recherche des axes a retenir et des coordonnées des points lignes et des points colonnes}
+
+Nous pouvons voir sur le tableau ci-dessous une partie des données de la répartition des nombres de médaillés sur les épreuves des Jeux Olympiques par les différents pays participants:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.75]{images/Extrait.PNG}
+\caption{Extrait de la repartition des nombres de medailles}
+\end{figure}
+
+Après avoir centre puis réduit le tableau de données, nous calculons les valeurs propres de la matrice d'inertie associée.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.75]{images/VP.PNG}
+\caption{Valeurs Propres de la matrice associée}
+\end{figure}
+
+\newpage
+
+L'étude des valeurs propres permet ensuite de déterminer les axes a retenir.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.75]{images/Plot_VP.PNG}
+\caption{Représentation des Valeurs Propres en pourcentage de la variance}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.75]{images/VP_cumule.PNG}
+\caption{Représentation des Valeur Propres en pourcentage cumule de la variance}
+\end{figure}
+
+Nous retiendrons alors les 3 axes associes a ces valeurs propres pour l'AFC: en effet ces 3 axes permettent d'expliquer environ 35\% de la variance totale des données. Nous déterminons ensuite les coordonnées, les contributions et les $\cos^2$ de chacun des points lignes et points colonnes pour tous les axes factoriels.
+\newline
+
+On procède au mapping simultané des points lignes et des points colonnes: nous représentons dans le même repère des axes retenus les points lignes et les points colonnes afin d'en dégager l'interprétation des données.
+
+\newpage
+
+Dans notre cas, nous effectuons le mapping sur l'axe 1 et 2:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{images/Mapping.PNG}
+\caption{Mapping sur l'axe 1 et 2 des points lignes et des points colonnes}
+\end{figure}
+
+\subsection{Interpretation}
+
+Dans notre interprétation, nous allons nous baser sur le mapping effectue sur les axes 1 et 2 précédent.
+\newline
+
+En reliant chaque point ligne et chaque point colonne a l'origine, on peut associer a chaque point un vecteur relatif a ce point. Ainsi, en étudiant les produits scalaires entre chaque vecteur nous distinguons essentiellement 3 cas: soit le produit scalaire est positif, soit il est négatif, soit il est proche de zero.
+\newline
+
+Dans le cas d'un produit scalaire positif, nous avons une conjonction entre les vecteurs: on a une forte correspondance entre les vecteurs.
+\newline
+
+Si le produit scalaire est négatif, nous avons une opposition entre les vecteurs: on a une forte incompatibilité entre les vecteurs.
+\newline
+
+Enfin lorsque le produit scalaire est nul, nous avons une quadrature entre les vecteurs: il n'y a pas de corrélation entre les vecteurs.
+\newline
+
+Ainsi, nous remarquons que le plan est divise en 3 régions de conjonctions.
+\newline
+
+Premièrement, nous remarquons une région ou se concentrent principalement les épreuves de forces tels que le lance de poids, le lance de disque, le lance de marteau,... ou dominent principalement domines par les Européens (Biélorussie, Russie,...).
+\newline
+
+Deuxièmement, nous observons une région ou l'on retrouve surtout les épreuves de course d'endurance telles que le 10000m, le 5000m, le marathon,... ou dominent principalement les Africains (Kenya, Éthiopie,...).
+\newline
+
+Puis finalement, nous avons une dernière région ou se concentrent surtout les épreuves de courses de vitesse telles que le 100m, le 200m, le 4*100m,... ou dominent principalement les Américains (USA, Jamaïque,...).
+\newline
+
+Ensuite, nous remarquons que la région ou se concentrent les épreuves de forces est en opposition avec celle ou se concentrent les épreuves de vitesses. Nous en déduisons que les athlètes doués en épreuves de forces sont généralement moins bons pour les épreuves de vitesses et inversement. Par conséquent, les pays ayant reçus plus de médailles dans les épreuves de forces ont généralement eu moins de médailles dans les épreuves de vitesses et réciproquement. Ainsi les Européens sont généralement bons en épreuve de force tel que le lance de marteau ou le lance de disque mais sont mauvais au 100m ou 200m. Tandis que les Américains sont plutôt bon au 100m et 200m, mais mauvais aux épreuves de lances(disques, marteau,...).
+\newline
+
+Enfin, nous remarquons que la région ou se concentrent les épreuves d'endurance est en quadrature avec ces deux régions. Donc les athlètes qui sont bons au épreuves d'endurance sont généralement moyens aux épreuves de forces et aux de vitesses. Par conséquent, les pays ayant remportes plusieurs médailles dans ces disciplines ne sont ni avantages ni désavantages dans les deux autres sortes d'épreuves. Ainsi les Africains qui sont généralement bons au marathon ne sont ni excellent ni mauvais ni au 100m ni au lance de marteau.
 
 \end{document}
