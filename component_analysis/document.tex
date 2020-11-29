@@ -29,10 +29,10 @@
 
 \subsection{Tableau de données}
 
-L'Analyse en Composante Pricipale s'interesse à l'etude des tableaux de données rectangulaires dont les lignes sont appelées \textit{Individus} et les colonnes sont appelées \textit{Variables}.
+L'\textbf{A}nalyse en \textbf{C}omposante \textbf{P}ricipale s'intéresse à l'étude des tableaux de données rectangulaires dont les lignes sont appelées \textit{Individus} et les colonnes sont appelées \textit{Variables}.
 \newline
 
-L'image ci-dessous illustre un tableau de donnees a \textit{n-individus} et a \textit{p-variables}. Un \textit{individu} est noté $i=(x_{i1},x_{i2}, ... ,x_{ip}) \in \mathbb{R}^p$ et une \textit{variable} est notée $x_j=(x_{1j},x_{2j}, ... ,x_{nj}) \in \mathbb{R}^n$
+L'image ci-dessous illustre un tableau de données a \textit{n-individus} et a \textit{p-variables}. Un \textit{individu} est noté $i=(x_{i1},x_{i2}, ... ,x_{ip}) \in \mathbb{R}^p$ et une \textit{variable} est notée $x_j=(x_{1j},x_{2j}, ... ,x_{nj}) \in \mathbb{R}^n$
 \newline
 
 \underline{NB:} Il est important de souligner que les \textit{variables} sont \textbf{quantitatives} en ACP, c'est à dire que $x_{ij} \in \mathbb{R}, \; \forall (i,j) \in [n]\times[p].$
@@ -50,7 +50,7 @@ Pour une \textit{variable} ${x_j}$, on note sa moyenne $\bar{x}_j$ et son écart
 \end{equation*}
 
 \subsection{Distance et Point moyen}
-En ACP, il est important de savoir quels \textit{individus} sont proches les un des autres, pour pouvoir, si possible, creer des groupes d'\textit{individus} selon leur proximité. Il est alors necessaire de definir une distance entre deux \textit{individus} i et i', soit d cette distance:
+En ACP, il est important de savoir quels \textit{individus} sont proches les un des autres, pour pouvoir, si possible, créer des groupes d'\textit{individus} selon leur proximité. Il est alors nécessaire de définir une distance entre deux \textit{individus} i et i', soit d cette distance:
 
 \begin{equation*}
 d^2(i,i')=\sum_{j=1}^{p}{(x_{ij}-x_{i'j})^2} 
@@ -58,7 +58,7 @@ d^2(i,i')=\sum_{j=1}^{p}{(x_{ij}-x_{i'j})^2}
 
 \newpage
 
-De plus, à partir de la moyenne de chaque \textit{variables}, on construit un point noté G et appelé \textbf{point moyen} du nuage des \textit{individus}, ce point peut etre interpreté comme le centre de gravité du nuage des \textit{individus}:
+De plus, à partir de la moyenne de chaque \textit{variables}, on construit un point noté G et appelé \textbf{point moyen} du nuage des \textit{individus}, ce point peut être interprété comme le centre de gravité du nuage des \textit{individus}:
 
 \begin{equation*}
 G=(\bar{x}_1,\bar{x}_2,...,\bar{x}_p)
@@ -78,17 +78,17 @@ x_{ij} \leftarrow x_{ij}-\bar{x}_j \;\;\;\;\; \forall i \in [n], \; \forall j \i
 Parfois, les \textit{variables} ne sont du même unité, ceci peut entrainer une ambiguïté dans l'interprétation des données, en effet, une variable a une ``quantité'' plus petite, dans le tableau, lorsqu'elle est exprimé en mettre, que lorsqu'elle est exprimé en centimètre. Ce qui peut entrainer, respectivement aux unités, une faible ou une forte importance par rapport aux autres variables qui faussera alors l'analyse.
 \newline
 
-Un moyen efficace d'eviter ce probleme est la \textbf{reduction}, elle consiste a diviser les \textit{variables} par leur écart-type.
+Un moyen efficace d'éviter ce problème est la \textbf{réduction}, elle consiste a diviser les \textit{variables} par leur écart-type.
 \newline
 
-Comme on a convenu plutot qu'il est preferable de centrer les \textit{variables}, alors le \textbf{centrage} et la \textbf{reduction} se traduit par: ``Replacer $x_j$ par $(x_{ij}-\bar{x}_j)/s_j$ dans le tableau de données'';
+Comme on a convenu plutôt qu'il est préférable de centrer les \textit{variables}, alors le \textbf{centrage} et la \textbf{réduction} se traduit par: ``Replacer $x_j$ par $(x_{ij}-\bar{x}_j)/s_j$ dans le tableau de données'';
 
 \begin{equation*}
 x_{ij} \leftarrow \frac{x_{ij}-\bar{x}_j}{s_j}  \;\;\;\;\; \forall i \in [n], \; \forall j \in [p]
 \end{equation*}
 \newline
 
-\underline{NB:} Apres le centrage et la reduction, nos nouvelles \textit{variables} sont alors ``asymptotiquement'' de moyenne nulle et de variance egale a un. c'est a dire:
+\underline{NB:} Après le centrage et la réduction, nos nouvelles \textit{variables} sont alors ``asymptotiquement'' de moyenne nulle et de variance égale a un. c'est a dire:
 
 \begin{equation*}
 \bar{x}_j \approx 0 \;\;\;\;\; s_j^2 \approx 1 \;\;\;\;\; \forall j \in [p]
@@ -96,13 +96,13 @@ x_{ij} \leftarrow \frac{x_{ij}-\bar{x}_j}{s_j}  \;\;\;\;\; \forall i \in [n], \;
 
 \subsection{Inertie}
 
-Par definition, l'inertie \textit{I} des données est:
+Par définition, l'inertie \textit{I} des données est:
 
 \begin{equation*}
 I = \frac{1}{n} \sum_{i=1}^n \sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2
 \end{equation*}
 
-C'est donc, au coefficient 1/n pres, la somme des carrés de toutes les cellules du tableau de données apres centrage et reduction, mais elle peut egalement etre interpretée par rapport aux \textit{individus} et aux \textit{variables}.
+C'est donc, au coefficient 1/n près, la somme des carrés de toutes les cellules du tableau de données après centrage et réduction, mais elle peut également être interprétée par rapport aux \textit{individus} et aux \textit{variables}.
 
 \newpage
 
@@ -110,7 +110,7 @@ C'est donc, au coefficient 1/n pres, la somme des carrés de toutes les cellules
 \textbf{Inertie et Individus}
 \end{flushleft}
 
-Soit l'individu $i \in [n]$, la quantité $\sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ de l'inertie represente la distance au carrée entre cet individue et le point moyen G. Par conséquent, l’inertie peut etre vue comme la somme des carres des distances au centre de gravite pour tous les individus.
+Soit l'individu $i \in [n]$, la quantité $\sum_{j=1}^p {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ de l'inertie represente la distance au carrée entre cet individu et le point moyen G. Par conséquent, l’inertie peut être vue comme la somme des carres des distances au centre de gravite pour tous les individus.
 \newline
 
 Ainsi, l’inertie renseigne sur la ``forme'' du nuage des individus. En effet, plus la distance entre les individus sont grande (resp. petite), plus l'inertie est grande (resp. petite).
@@ -119,13 +119,13 @@ Ainsi, l’inertie renseigne sur la ``forme'' du nuage des individus. En effet, 
 \textbf{Inertie et Variables}
 \end{flushleft}
 
-Dans la definition de l'inertie, les deux somme $\sum$ peuvent etre interverti, ainsi, on a une autre expression:
+Dans la définition de l'inertie, les deux somme $\sum$ peuvent être interverti, ainsi, on a une autre expression:
 
 \begin{equation*}
 I = \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2
 \end{equation*}
 
-Ici, on peut remarquer que la quantité $\sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ correspond au carré de la norme de la variable centrée reduite $x_j$ ou $j \in [p]$. Or cette quantité est egale à n, ainsi, l'inertie est toujour egale au nombre de variables, en effet:
+Ici, on peut remarquer que la quantité $\sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2$ correspond au carré de la norme de la variable centrée réduite $x_j$ ou $j \in [p]$. Or cette quantité est égale à n, ainsi, l'inertie est toujours égale au nombre de variables, en effet:
 
 \begin{align*}
 I &= \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} \right)}^2 \\
@@ -139,7 +139,7 @@ I &= \frac{1}{n} \sum_{j=1}^p \sum_{i=1}^n {\left( \frac{x_{ij}-\bar{x}_j}{s_j} 
 
 \subsection{Représentation Simplifiée}
 
-On a vu que les \textit{variables} sont des vecteurs de $\mathbb{R}^p$, alors, quand $p > 3$, il n'est plus possible de representer les variables. L'ACP vise a fournir une image simplifiée du nuage des \textit{individus} la plus fidele possible, cest a dire, trouver une sous-espace de dimension plus petite qui resume au mieux les données.
+On a vu que les \textit{variables} sont des vecteurs de $\mathbb{R}^p$, alors, quand $p > 3$, il n'est plus possible de représenter les variables. L'ACP vise a fournir une image simplifiée du nuage des \textit{individus} la plus fidèle possible, c'est a dire, trouver une sous-espace de dimension plus petite qui résume au mieux les données.
 \newline
 
 \newpage
@@ -148,24 +148,23 @@ On a vu que les \textit{variables} sont des vecteurs de $\mathbb{R}^p$, alors, q
 \textbf{Comment retrouver la meilleur sous-espace?}
 \end{flushleft}
 
-Pensons pour cela a l’image d’un chameau, la figure ci-dessous propose deux
-representations simplifiees de cette image: des representations en dimension 2, la vue de face et la vue de profil.
+Pensons pour cela a l’image d’un chameau, la figure ci-dessous propose deux représentations simplifiées de cette image: des représentations en dimension 2, la vue de face et la vue de profil.
 
 \begin{figure}[h!]
 \centering
 \includegraphics[width=200px]{images/chameau.png}
 \end{figure}
 
-Il est evident de dire que la meilleure representation simplifiee est la vue de profil. La raison est que l’image projetee du chameau dans ce plan est plus proche de l’image initiale dans le sens ou la variabilite des points qui la representent est plus grande et donc restitue mieux la variabilitee des points d’origine en dimension 3.
+Il est évident de dire que la meilleure représentation simplifiée est la vue de profil. La raison est que l’image projetée du chameau dans ce plan est plus proche de l’image initiale dans le sens ou la variabilité des points qui la représentent est plus grande et donc restitue mieux la variabilité des points d’origine en dimension 3.
 \newline
 
-On a alors les etapes suivantes pour retouver analytiquement la meilleure representation simplifiee du nuage des \textit{individus}:
+On a alors les étapes suivantes pour retrouver analytiquement la meilleure représentation simplifiée du nuage des \textit{individus}:
 
 \begin{flushleft}
-Etape 1: \textbf{Trouver l'axe qui deforme le moins possible le nuage}
+Étape 1: \textbf{Trouver l'axe qui déforme le moins possible le nuage}
 \end{flushleft}
 
-On cherche un axe dans $\mathbb{R}^p$ de sorte que les distances entre les points initiaux i (\textit{individu}) soient les plus proches possibles de leurs projetes orthogonaux sur cette axe et cela en tenant compte de tous les autres points. Notons $\vec{u}_1$ la direction de cet axe, et $H_i$ la projetée orthogonale de i.
+On cherche un axe dans $\mathbb{R}^p$ de sorte que les distances entre les points initiaux i (\textit{individu}) soient les plus proches possibles de leurs projetés orthogonaux sur cette axe et cela en tenant compte de tous les autres points. Notons $\vec{u}_1$ la direction de cet axe, et $H_i$ la projetée orthogonale de i.
 \newline
 
 \InsertBoxL{0}{\quad\includegraphics[width=200px]{images/projection.png}\quad} %
@@ -176,33 +175,33 @@ Le but est de minimiser la distance $iH_i$, ce qui revient a maximiser la distan
 Plus formellement, on cherche la direction $\vec{u}_1$ de $\mathbb{R}^p$ telle que $\sum_{i=1}^n OH_i^2$ soit maximum.
 \newline
 
-On dira qu’on cherche $\vec{u}_1$ telle que l’inertie projetee $I_p$ est maximum.
+On dira qu’on cherche $\vec{u}_1$ telle que l’inertie projetée $I_p$ est maximum.
 
 \begin{flushleft}
-Etape 2: \textbf{Trouver le meilleur plan}
+Étape 2: \textbf{Trouver le meilleur plan}
 \end{flushleft}
 
-Cette fois ci, on cherche le meilleur plan $\mathcal{P}$ ou l'inertie projetee $I_p$ est maximal sur ce plan, pour ce faire, on cherche une direction $\vec{u}_1$ qui maximise $I_p$ (fait à l'etape 1), puis on cherche une autre direction $\vec{u}_2$ orthogonale a $\vec{u}_1$ et qui, elle aussi, maximise $I_p$.
+Cette fois ci, on cherche le meilleur plan $\mathcal{P}$ ou l'inertie projetée $I_p$ est maximale sur ce plan, pour ce faire, on cherche une direction $\vec{u}_1$ qui maximise $I_p$ (fait à l'étape 1), puis on cherche une autre direction $\vec{u}_2$ orthogonale a $\vec{u}_1$ et qui, elle aussi, maximise $I_p$.
 \newline
 
-Le plan meilleur plan $\mathcal{P}$ est formé par les deux meilleurs axes de directions respectives $\vec{u}_1$ et $\vec{u}_2$, orthogonals l'un a l'autre.
+Le plan meilleur plan $\mathcal{P}$ est formé par les deux meilleurs axes de directions respectives $\vec{u}_1$ et $\vec{u}_2$, orthogonales l'un a l'autre.
 
 \begin{flushleft}
-Etape 3: \textbf{Trouver un troisieme meilleur axe}
+Étape 3: \textbf{Trouver un troisième meilleur axe}
 \end{flushleft}
 
-On peut chercher un troisieme axe et sequentielement, chercher les axes les un apres les autres et a chaque fois, un axe doit etre orthogonal aux axes precedents, et maximise l'inertie projetee $I_p$.
+On peut chercher un troisième axe et essentiellement, chercher les axes les un après les autres et a chaque fois, un axe doit être orthogonal aux axes précédents, et maximise l'inertie projetée $I_p$.
+\newline
 
-\newpage
-
-\subsection{Correlation}
-
+\begin{flushleft}
+\underline{NB}: A l'issu de ces étapes, on appel les axes de direction $\vec{u}_j,j \in [p]$, \textbf{Composantes Principales}
+\end{flushleft}
 
 \newpage
 
 \section{La pratique}
 
-\subsection{Les données}
+\subsection{Données}
 
 Nous allons étudier les résultats des épreuves de Decastar et des Jeux Olympiques, dont les \textit{Individus} sont les joueurs et les \textit{Variables} sont les jeux eux même, soient:
 \newline
@@ -227,31 +226,38 @@ Voici une partie des données utilisées:
 \includegraphics[width=\linewidth]{images/data_initials.png}
 \end{figure}
 
-On voit bien ici que les \textit{Variables} ne sont pas de même unité, alors on va d'abord les \underline{normalisées}. On peut confirmer que les \textit{Variables} sont bien normalisées quand elles sont asymptotiquement de moyenne nulle et de variance égale a un.
+\subsection{Centrage et Reduction}
+
+On voit bien que les \textit{variables} ne sont pas de même unité, alors en plus du centrage, on va aussi réduire les variables. Après avoir fait cette étape dans un logiciel statistique. On veut confirmer que les \textit{variables} sont bien centrées et réduites, c'est a dire qu'elles sont asymptotiquement de moyenne nulle et de variance égale a un. Ainsi on a la figure ci-dessous:
 
 \begin{figure}[h!]
 \includegraphics[width=\linewidth]{images/mean_variance.png}
 \end{figure}
 
-D'après ces résultats, les moyennes et les variances de nos \textit{Variables Normalisées} tendent bien vers 0 et 1 respectivement.
+D'après ces résultats, les moyennes et les variances de nos \textit{variables normalisées} tendent bien vers 0 et 1 respectivement.
 \newline
-
-A partir d'ici, on va travailler avec les \textbf{Données Normalisées} 
 
 \newpage
 
-\subsection{Les variables explicatives}
+\begin{flushleft}
+\underline{NB}: A partir d'ici, on va travailler avec les \textbf{Données Normalisées} 
+\end{flushleft}
 
-Parfois, il y a des \textit{Variables} dont l'importance est néglisable par rapport aux autres, il est important de les reconnaitre ou même de les éliminer pour avoir une meilleur analyse des données. Les \textit{Variables} restantes issue de cette \underline{élimination} seront appelées \textit{Variables Explicatives}.
+\subsection{Les axes a retenir}
+
+Un moyen de trouver les \textbf{composantes principales} ou \textbf{meilleurs axes} est de calculer les \textit{valeurs propres} de la matrice de covariances des \textit{variables}. En ordonnant ces \textit{valeurs propres} par ordre décroissant, les \textit{vecteurs propres} associes deviennent les directions $\vec{u}_j,j \in [p]$ des \textbf{composantes principales}.
 \newline
 
-Il y a plusieurs méthodes pour retrouver les variables à éliminer, mais pour notre problème, on va utiliser la méthode du coudé, d'après \href{https://fr.qaz.wiki/wiki/Elbow_method_(clustering)}{Wikipedia - Méthode du coude (clustering)} 
+La quantité d'informations portée par un axe est alors proportionnelle a la \textit{valeur propre} associée, ainsi, un nombre $k<p \in \mathbb{N}^*$ d'axes suffit pour représenter les individus. En effet, il y a des axes dans leur \textit{valeur propre} est neglisable par rapport a celles des autres.
 \newline
 
-\textit{La méthode du coude est une heuristique utilisée pour déterminer le nombre de clusters (Variables dans notre cas) dans un ensemble de données . La méthode consiste à tracer la} \textbf{variation expliquée} \textit{en fonction du nombre de clusters, et à choisir le coude de la courbe comme le nombre de clusters à utiliser. La même méthode peut être utilisée pour choisir le nombre de paramètres dans d'autres modèles basés sur les données, comme le nombre de composants principaux pour décrire un ensemble de données}
+Il y a plusieurs méthodes pour retrouver les axes à éliminer, mais pour notre problème, on va utiliser la méthode du coudé, d'après \href{https://fr.qaz.wiki/wiki/Elbow_method_(clustering)}{Wikipedia - Méthode du coude (clustering)} 
 \newline
 
-Pour ce faire, on a donc besoin des variation expliquée de chaque \textit{Variable} de notre données normalisées et de trace la courbe de la fonction f définie par:
+\textit{La méthode du coude est une heuristique utilisée pour déterminer le nombre de clusters (axes dans notre cas) dans un ensemble de données. La méthode consiste à tracer la \textbf{variation expliquée} en fonction du nombre de clusters, et à choisir le coude de la courbe comme le nombre de clusters à utiliser. La même méthode peut être utilisée pour choisir le nombre de paramètres dans d'autres modèles basés sur les données, comme le nombre de composants principaux pour décrire un ensemble de données}
+\newline
+
+Pour ce faire, on a donc besoin des variation expliquée, qui sont les \textit{valeurs propres} associées à nos axes et de trace la courbe de la fonction f définie par:
 
 \begin{equation*}
 f(V_e)=\frac{(n-1)}{n}*V_e \quad , \; V_e \; est \; la  \; variance \; explicative.
@@ -261,33 +267,53 @@ f(V_e)=\frac{(n-1)}{n}*V_e \quad , \; V_e \; est \; la  \; variance \; explicati
 \includegraphics[width=\linewidth]{images/courbe_ve.png}
 \end{figure}
 
-D'après la graphe de la fonction - variance expliquée - on ne va donc retenir que les deux premières \textit{Variables} qui sont: la \textit{Variable 100m} et la \textit{Variables Longueur}.
+D'après la graphe de la fonction - variance expliquée - on ne va donc retenir que les deux premières \textbf{composantes principales} suivant l'ordre décroissante des \textit{valeurs propres}.
 
 \newpage
 
-A partir de ces deux \textit{Variables}, on peut positionner les individus dans le plan. On a alors la figure suivante:
+On peut ainsi positionner les individus dans le plan formé par ces deux \textbf{composantes principales}. On a alors la figure suivante:
 
 \begin{figure}[h!]
 \includegraphics[width=\linewidth]{images/graph-plan.png}
 \end{figure}
 
 \begin{flushleft}
-\textbf{Interpretation du premier axe}
+\textbf{Interprétation du premier axe (Horizontale)}
 \end{flushleft}
 
-On peut remarquer du premier axe qu'elle departage les joueurs ayant un bon classement a ceux qui ont un mauvais classement pendant les deux competitions.
-En effet, les joueurs \textbf{Karpov} et \textbf{Clay} qui sont le deuxieme et le troisieme dans le classement des Jeux Olympiques, et des Jeux de Decastar sont placés à droite dans la premier axe alors que le joueur \textbf{Uldal}, avant dernier du classement des JO et le joueur \textbf{Bourguignon}, dernier du classement de Decastar sont placés a gauche dans la premier axe. 
+On peut remarquer du premier axe qu'il départage les joueurs ayant un bon classement a ceux qui ont un mauvais classement pendant les deux compétitions.
+En effet, les joueurs \textbf{Karpov} et \textbf{Clay} qui sont le deuxieme et le troisième dans le classement des Jeux Olympiques, et des Jeux de Decastar sont placés à droite dans la premier axe, alors que le joueur \textbf{Uldal}, avant dernier du classement des JO et le joueur \textbf{Bourguignon}, dernier du classement de Decastar sont placés a gauche dans la premier axe. 
 
 \begin{flushleft}
-\textbf{Interpretation du deuxieme axe}
+\textbf{Interprétation du deuxième axe (Verticale)}
 \end{flushleft}
 
-On peut remarquer du deuxieme axe qu'elle departage les joueurs  
+On peut remarquer du deuxième axe qu'il départage les joueurs forts dans les épreuves de vitesse et d'endurance a ceux qui sont fort dans les épreuves de lancés (poids, perche, javelot).
+En effet, les joueurs \textbf{Carcasa} et \textbf{Yurkov} qui sont meilleurs dans les épreuves de lancées respectivement aux JO et Decastar sont placées en haut du deuxième axe, alors que les joueurs \textbf{Drews} et \textbf{Bernard} forts aux épreuves respectives d'endurances pendant les JO et de vitesse pendant le Decastar sont placés en bas du deuxième axe.
+
+\newpage
+
+Le cercle de corrélation ci-dessous peut nous donner encore plus d'informations sur nos données par l'interprétation des variables.
 
 \begin{figure}[h!]
 \includegraphics[width=\linewidth]{images/cercle_cor.png}
 \end{figure}
 
+\begin{flushleft}
+\textbf{Interprétation des corrélations positives}
+\end{flushleft}
 
+\begin{itemize}
+\item On remarque que les épreuves \textbf{100m} et \textbf{110m H} sont très corrélées positivement, c'est a dire que les joueurs forts sur l'une sont aussi forts sur l'autre. Ce sont les joueurs fort en vitesse qu'on a vu dans l'interprétation des \textbf{composantes principales}.
+\item De même, les épreuves \textbf{Poids}, \textbf{Disque} et \textbf{Javelot} sont corrélées positivement, cette corrélation regroupe les épreuves de lancés. Ceci aussi renforce notre interprétation des \textbf{composantes principales}.
+\end{itemize}
+
+\begin{flushleft}
+\textbf{Interprétation des corrélations négatives}
+\end{flushleft}
+
+\begin{itemize}
+\item On remarque que les épreuves \textbf{400m} et \textbf{Longueur} sont très corrélées négativement, c'est a dire que les joueurs meilleurs sur l'un sont mauvais sur l'autre. On peut remarquer dans ce cas le joueur \textbf{Martineau} pendant le Decastar, ou il est très fort en \textbf{400m} mais très mauvais en \textbf{Longueur}, ou le joueur \textbf{Karpov} pendant les JO, qui est très faible en \textbf{400m} mais très fort en \textbf{Longueur}.
+\end{itemize}
 
 \end{document}
